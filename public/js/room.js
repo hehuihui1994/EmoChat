@@ -45,6 +45,9 @@ Room.prototype = {
                                 data.push(key);
                                 data.push(dictionary[key]);
                             }
+
+                            updateHapinessHistory(happiness);
+                            updateExcitementHistory(excitment);                            
                         } else {
                             console.log("no features");
                         }
@@ -361,6 +364,19 @@ Room.prototype = {
     }
 
 };
+
+var myEmotion = "none";
+var otherEmotion = "none";  
+var happynessHistory = {};
+var excitementHistory = {};
+
+var updateHapinessHistory = function (happiness) { 
+
+}
+
+var updateExcitementHistory = function (excitement) { 
+
+}
 
 var findConnectionIdFromElement = function (el) {
     var className;
