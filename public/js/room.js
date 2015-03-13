@@ -36,6 +36,18 @@ Room.prototype = {
                         if (record["features"]) {
 
                             var dictionary = record["features"];
+                            e1Hist.push(dictionary["e1"]);
+                            e2Hist.push(dictionary["e2"]);
+                            e3Hist.push(dictionary["e3"]);
+                            h1Hist.push(dictionary["h1"]);
+                            h2Hist.push(dictionary["h2"]);
+                            
+                            e1Hist.shift();
+                            e2Hist.shift();
+                            e3Hist.shift();
+                            h1Hist.shift();
+                            h2Hist.shift();
+
                             //var happiness = Math.max(dictionary["h1"], dictionary["h2"]);
                             //var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
                             var happiness_ext = chooseExtreme(Math.max(dictionary["h1"], dictionary["h2"]), Math.min(dictionary["h1"], dictionary["h2"]));
@@ -48,8 +60,7 @@ Room.prototype = {
                                 data.push(dictionary[key]);
                             }
 
-                            updateHapinessHistory(happiness);
-                            updateExcitementHistory(excitment);                            
+                            updateHistory();                          
                         } else {
                             console.log("no features");
                         }
@@ -369,15 +380,48 @@ Room.prototype = {
 
 var myEmotion = "none";
 var otherEmotion = "none";  
-var happynessHistory = {};
-var excitementHistory = {};
+var happinessHistory = new Array(10);
+var excitementHistory = new Array(10);
+var e1Hist = [];
+var e2Hist = [];
+var e3Hist = [];
+var h1Hist = [];
+var h2Hist = [];
 
-var updateHapinessHistory = function (happiness) { 
+var updateHistory = function () { 
+  
 
+  var excitment_ext = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)), Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)));
+  var happiness_ext = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)), Math.min(array_avg(h1Hist), array_avg(h2Hist)));
+  happinessHistory.push(happiness);
+  happinessHistory.shift();
+
+  excitementHistory.push(excitement);
+  excitementHistory.shift();
+
+  var happy = chooseExtreme(Math.max(happinessHistory), Math.min(happinessHistory));
+  var excited = chooseExtreme(Math.max(excitementHistory), Math.min(excitementHistory));
+
+  if(happy > 0 && excited > 0){
+    myEmotion = "Super";
+  }
+  if(happy < 0 && excited > 0){
+    myEmotion = "Angry";
+  }
+  if(happy < 0 && excited < 0){
+    myEmotion = "Sad";
+  }
+  if(happy > 0 && excited < 0){
+    myEmotion = "High";
+  }
 }
 
-var updateExcitementHistory = function (excitement) { 
-
+var array_avg = function (ar) {
+  var sum = 0;
+  for (var i = 0; i < ar.length; i++) {
+    sum += ar[i];
+  }
+  return sum / ar.length;
 }
 
 var findConnectionIdFromElement = function (el) {
