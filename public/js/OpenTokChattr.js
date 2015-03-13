@@ -336,14 +336,32 @@ OpenTokChattr.prototype = {
     },
     getEmotion: function () {
         // Getting emotion from Aharon and setting in the outgoing message
-        return "Happy2"
+        return myEmotion;
     },
     changeBackgroundColor: function (signalData) {
         // other person emotion
         if (_this.session.connection.connectionId !== signalData.from) {
-            if (true /*emotion === 'engry'*/) {
-                jQuery('#streams_container').css('background-color', 'red');
-                jQuery('.emotionFace').css('background-image', 'url("../res/angry.jpg")');
+            switch (signalData.Emotion) {
+                case 'angry':
+                    jQuery('#streams_container').css('background-color', 'red');
+                    jQuery('.emotionFace').css('background-image', 'url("../res/angry.png")');
+                    break;
+                case 'super':
+                    jQuery('#streams_container').css('background-color', 'yellow');
+                    jQuery('.emotionFace').css('background-image', 'url("../res/super.png")');
+                    break;
+                case 'sad':
+                    jQuery('#streams_container').css('background-color', 'blue');
+                    jQuery('.emotionFace').css('background-image', 'url("../res/sad.png")');
+                    break;
+                case 'high':
+                    jQuery('#streams_container').css('background-color', 'green');
+                    jQuery('.emotionFace').css('background-image', 'url("../res/high.png")');
+                    break;
+                default:
+                    jQuery('#streams_container').css('background-color', 'black');
+                    jQuery('.emotionFace').css('background-image', '');
+                    break;
             }
         }
         // my emotion
