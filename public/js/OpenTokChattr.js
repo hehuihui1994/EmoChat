@@ -338,11 +338,17 @@ OpenTokChattr.prototype = {
         // Getting emotion from Aharon and setting in the outgoing message
         return "Happy2"
     },
-    changeBackgroundColor: function (signalData) {        
-        if(_this.session.connection.connectionId !== signalData.from) {
-          if (true /*emotion === 'engry'*/) {
-            jQuery('body').css('background-color', 'red');
-          }
-        }        
+    changeBackgroundColor: function (signalData) {
+        // other person emotion
+        if (_this.session.connection.connectionId !== signalData.from) {
+            if (true /*emotion === 'engry'*/) {
+                jQuery('#streams_container').css('background-color', 'red');
+                jQuery('.emotionFace').css('background-image', 'url("../res/angry.jpg")');
+            }
+        }
+        // my emotion
+        else if (_this.session.connection.connectionId === signalData.from) {
+
+        }
     }
 }

@@ -16,6 +16,58 @@ function Room(roomId, session, token, chattr) {
 }
 Room.prototype = {
     constructor: Room,
+    getEmotions: function () {
+        var socket;
+        if ( !window.WebSocket ) {
+            window.WebSocket = window.MozWebSocket;
+        }
+        if ( window.WebSocket ) {
+            var reconnectInterval = 1000 * 60;
+            var connect = function () {
+                var count = 0;
+                socket = new WebSocket( "ws://54.175.79.56:8080/v1/features/0006664e5401/pull" );
+                socket.onmessage = function ( event ) {
+                    if (event.data) {
+                        record = eval( "(" + event.data + ")" ); // convert to JSON
+
+                        //ta.value = count++ + '\n' + record["features"]["h1"];
+                        //text_output = text_output.concat(ta.value);
+                        //ta.value = text_output;
+                        if (record["features"]) {
+
+                            var dictionary = record["features"];
+                            var happiness = Math.max(dictionary["h1"], dictionary["h2"]);
+                            var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
+                            console.log("Happiness:\t" + happiness + "\nExcitment:\t" + excitment);
+                            var data = [];
+                            //ta.value = count++ + '\n' + record["features"]["h1"];
+                            for(var key in dictionary) {
+                                data.push(key);
+                                data.push(dictionary[key]);
+                            }
+                        } else {
+                            console.log("no features");
+                        }
+                    }
+                };
+                socket.onopen = function ( event ) {
+                    console.log("Web Socket opened!");
+                };
+                socket.onerror = function () {
+                    console.log( 'socket error' );
+                    setTimeout( connect, reconnectInterval );
+                };
+                socket.onclose = function ( event ) {
+                    console.log( 'socket close' );
+                    console.log("Web Socket closed, reconnect in " + reconnectInterval + " msec");
+                    setTimeout( connect, reconnectInterval );
+                };
+            };
+            connect();
+        } else {
+            alert( "Your browser does not support Web Socket." );
+        }
+    },
     init: function () {
         var self = this;
         window.onresize = self.layout;
@@ -58,6 +110,7 @@ Room.prototype = {
         });
         jQuery('#chatButton')[0].click();
         jQuery('.chatEnabled').css('width', '50%');
+        this.getEmotions();
     },
     initOT: function () {
         var _this = this;
