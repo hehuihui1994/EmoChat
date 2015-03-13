@@ -354,6 +354,10 @@ body #streams_container .streamContainer {
 
 body #streams_container .emotionFace {
     background-size: cover;
+    -webkit-transition: opacity 2s ease-in-out;
+    -moz-transition: opacity 2s ease-in-out;
+    -o-transition: opacity 2s ease-in-out;
+    transition: opacity 2s ease-in-out;
 }
 
 body #streams_container .streamContainer .OT_video-container {
