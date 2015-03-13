@@ -36,9 +36,11 @@ Room.prototype = {
                         if (record["features"]) {
 
                             var dictionary = record["features"];
-                            var happiness = Math.max(dictionary["h1"], dictionary["h2"]);
-                            var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
-                            console.log("Happiness:\t" + happiness + "\nExcitment:\t" + excitment);
+                            //var happiness = Math.max(dictionary["h1"], dictionary["h2"]);
+                            //var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
+                            var happiness_ext = chooseExtreme(Math.max(dictionary["h1"], dictionary["h2"]), Math.min(dictionary["h1"], dictionary["h2"]));
+                            var excitment_ext = chooseExtreme(Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]), Math.min(dictionary["e1"], dictionary["e2"], dictionary["e3"]));
+                            console.log("Happiness:\t" + happiness_ext + "\nExcitment:\t" + excitment_ext);
                             var data = [];
                             //ta.value = count++ + '\n' + record["features"]["h1"];
                             for(var key in dictionary) {
@@ -371,5 +373,14 @@ var findConnectionIdFromElement = function (el) {
         }
     }
     return undefined;
+};
+
+var chooseExtreme = function(a, b) {
+    if (Math.abs(a) > Math.abs(b)) {
+        return a;
+    }
+    else {
+        return b;
+    }
 };
 
