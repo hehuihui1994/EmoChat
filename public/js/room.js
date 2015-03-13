@@ -382,37 +382,29 @@ var myEmotion = "none";
 var otherEmotion = "none";  
 var happinessHistory = new Array(10);
 var excitementHistory = new Array(10);
-var e1Hist = [];
-var e2Hist = [];
-var e3Hist = [];
-var h1Hist = [];
-var h2Hist = [];
+var e1Hist = [0,0,0,0,0,0,0,0,0,0];
+var e2Hist = [0,0,0,0,0,0,0,0,0,0];
+var e3Hist = [0,0,0,0,0,0,0,0,0,0];
+var h1Hist = [0,0,0,0,0,0,0,0,0,0];
+var h2Hist = [0,0,0,0,0,0,0,0,0,0];
 
 var updateHistory = function () { 
   
 
-  var excitment_ext = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)), Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)));
-  var happiness_ext = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)), Math.min(array_avg(h1Hist), array_avg(h2Hist)));
-  happinessHistory.push(happiness);
-  happinessHistory.shift();
-
-  excitementHistory.push(excitement);
-  excitementHistory.shift();
-
-  var happy = chooseExtreme(Math.max(happinessHistory), Math.min(happinessHistory));
-  var excited = chooseExtreme(Math.max(excitementHistory), Math.min(excitementHistory));
+  var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)), Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)));
+  var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)), Math.min(array_avg(h1Hist), array_avg(h2Hist)));
 
   if(happy > 0 && excited > 0){
-    myEmotion = "Super";
+    myEmotion = "super";
   }
   if(happy < 0 && excited > 0){
-    myEmotion = "Angry";
+    myEmotion = "angry";
   }
   if(happy < 0 && excited < 0){
-    myEmotion = "Sad";
+    myEmotion = "sad";
   }
   if(happy > 0 && excited < 0){
-    myEmotion = "High";
+    myEmotion = "high";
   }
 }
 
