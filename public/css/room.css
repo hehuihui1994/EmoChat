@@ -228,7 +228,10 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Muli', sans-serif; }
 
 body {
-  background: #555555; }
+  background: #555555;
+  transition: background 4s linear;
+  -webkit-transition: background 4s linear;
+  -moz-transition: background 4s linear;}
   body * {
     box-sizing: content-box; }
   body .container {

@@ -329,6 +329,8 @@ OpenTokChattr.prototype = {
     return "Happy2"
   },
   changeBackgroundColor: function(emotion) {
-    
+      if (true /*emotion === 'engry'*/) {
+        jQuery('body').css('background-color', 'red');
+      }
   }
 }
