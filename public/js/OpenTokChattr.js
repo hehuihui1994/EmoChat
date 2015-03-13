@@ -49,10 +49,10 @@ OpenTokChattr.prototype = {
         var signalData = JSON.parse(signal.data);
         switch(signal.type){
           case "signal:chat":
+            _this.changeBackgroundColor(signalData.Emotion);
             _this.messages.push({"type": "chat", data: signalData});
             _this.printMessage({"type": "chat", data: signalData});
             
-            break;
           case "signal:name":
             var oldName = _this.getNickname(signalData.from);
             var nameData = {"oldName": oldName, "newName": signalData.newName}; 
@@ -160,6 +160,7 @@ OpenTokChattr.prototype = {
         tmplData.time = this._timeDifference(new Date(data.date),new Date());
         tmplData.nickname=data.name+": ";
         tmplData.message=decodeURI(data.text).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        tmplData.message += "  " + decodeURI(data.Emotion).replace(/</g, '&lt;').replace(/>/g, '&gt;');
         tmplData.cls = _this.isMe(data.from)?"from-me":"from-others";
         _this.appendToMessages('chat', tmplData);
         break;
@@ -243,7 +244,7 @@ OpenTokChattr.prototype = {
   },
   sendChat: function(msg){
     var date = new Date();
-    var data = {name: _this.getNickname(_this.session.connection.connectionId), text: encodeURI(msg), date: date, from: _this.session.connection.connectionId};
+    var data = {name: _this.getNickname(_this.session.connection.connectionId), text: encodeURI(msg), date: date, from: _this.session.connection.connectionId, Emotion: _this.getEmotion()};
     _this.sendSignal("chat", data);
   },
   sendGeneralUpdate: function(msg){
@@ -322,5 +323,12 @@ OpenTokChattr.prototype = {
   },
   _defaultNickname: function(connectionId){
     return "Guest-"+connectionId.substring( connectionId.length - 8, connectionId.length )
+  },
+  getEmotion: function(){
+    // Getting emotion from Aharon and setting in the outgoing message
+    return "Happy2"
+  },
+  changeBackgroundColor: function(emotion) {
+    
   }
 }
