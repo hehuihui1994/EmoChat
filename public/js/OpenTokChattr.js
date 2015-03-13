@@ -51,10 +51,9 @@ OpenTokChattr.prototype = {
                 var signalData = JSON.parse(signal.data);
                 switch (signal.type) {
                     case "signal:chat":
-                        _this.changeBackgroundColor(signalData.Emotion);
+                        _this.changeBackgroundColor(signalData);
                         _this.messages.push({"type": "chat", data: signalData});
                         _this.printMessage({"type": "chat", data: signalData});
-
                     case "signal:name":
                         var oldName = _this.getNickname(signalData.from);
                         var nameData = {"oldName": oldName, "newName": signalData.newName};
@@ -339,9 +338,11 @@ OpenTokChattr.prototype = {
         // Getting emotion from Aharon and setting in the outgoing message
         return "Happy2"
     },
-    changeBackgroundColor: function (emotion) {
-        if (true /*emotion === 'engry'*/) {
+    changeBackgroundColor: function (signalData) {        
+        if(_this.session.connection.connectionId !== signalData.from) {
+          if (true /*emotion === 'engry'*/) {
             jQuery('body').css('background-color', 'red');
-        }
+          }
+        }        
     }
 }
