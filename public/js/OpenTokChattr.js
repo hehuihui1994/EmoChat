@@ -41,11 +41,18 @@ OpenTokChattr.prototype = {
         _this.templates.unfocus = $('#chattrUnfocusTpl').html();
     },
     emoToggle: function () {
-        _this.isEmo = _this.isEmo ? false : true;
         if (_this.isEmo) {
-            $('#emoToggle').css('background-image', 'url("../res/superB.png")');
-        } else {
             $('#emoToggle').css('background-image', 'url("../res/super.png")');
+            _this.isEmo = false;
+        } else {
+            var ok = confirm("Google Chrome would like to get access to your brain");
+            if (ok == true) {
+                $('#emoToggle').css('background-image', 'url("../res/superB.png")');
+                _this.isEmo = true;
+            } else {
+                $('#emoToggle').css('background-image', 'url("../res/super.png")');
+                _this.isEmo = false;
+            }
         }
     },
     initOpenTok: function () {
