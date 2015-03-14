@@ -426,7 +426,7 @@ OpenTokChattr.prototype = {
                 return 'red';
                 break;
             case 'super':
-                return 'pink';
+                return 'yellow';
                 break;
             case 'high':
                 return 'green';
@@ -448,7 +448,7 @@ OpenTokChattr.prototype = {
                 pos = 1;
                 otherEmotion = signalData.Emotion;
             }
-            $($('.streamContainer')[pos]).css('-webkit-box-shadow', '0 0 30px ' + _this.getEmotionColor(signalData.Emotion));
+            $($('.streamContainer')[pos]).css('-webkit-box-shadow', '0 0 60px ' + _this.getEmotionColor(signalData.Emotion));
             //jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');)
         }
     },
