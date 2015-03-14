@@ -111,6 +111,31 @@ OpenTokChattr.prototype = {
                 delete _this.users[event.connection.connectionId];
             }
         });
+        jQuery( "body" ).keydown(function(event) {
+            console.log( "Handler for .keypress() called." );
+            var mockData = {};
+            switch ( event.which ) {
+                case 49:
+                    event.preventDefault();
+                    mockData.Emotion = 'high';
+                    break;
+                case 50:
+                    event.preventDefault();
+                    mockData.Emotion = 'sad';
+                    break;
+                case 51:
+                    event.preventDefault();
+                    mockData.Emotion = 'super';
+                    break;
+                case 52:
+                    event.preventDefault();
+                    mockData.Emotion = 'angry';
+                    break;
+                default :
+                    break;
+            }
+            _this.changeBackgroundColor(mockData)
+        });
     },
     close: function () {
         if (this.options.closeable)
@@ -339,34 +364,36 @@ OpenTokChattr.prototype = {
         return myEmotion;
     },
     changeBackgroundColor: function (signalData) {
-        // other person emotion
-        if (_this.session.connection.connectionId !== signalData.from) {
-            switch (signalData.Emotion) {
-                case 'angry':
-                    jQuery('#streams_container').css('background-color', 'red');
-                    jQuery('.emotionFace').css('background-image', 'url("../res/angry.png")');
-                    break;
-                case 'super':
-                    jQuery('#streams_container').css('background-color', 'yellow');
-                    jQuery('.emotionFace').css('background-image', 'url("../res/super.png")');
-                    break;
-                case 'sad':
-                    jQuery('#streams_container').css('background-color', 'blue');
-                    jQuery('.emotionFace').css('background-image', 'url("../res/sad.png")');
-                    break;
-                case 'high':
-                    jQuery('#streams_container').css('background-color', 'green');
-                    jQuery('.emotionFace').css('background-image', 'url("../res/high.png")');
-                    break;
-                default:
-                    jQuery('#streams_container').css('background-color', 'black');
-                    jQuery('.emotionFace').css('background-image', '');
-                    break;
+        if (signalData && signalData.Emotion) {
+            // other person emotion
+            if (_this.session.connection.connectionId !== signalData.from) {
+                switch (signalData.Emotion) {
+                    case 'angry':
+                        jQuery('#streams_container').css('background-color', 'red');
+                        jQuery('.emotionFace').css('background-image', 'url("../res/angry.png")');
+                        break;
+                    case 'super':
+                        jQuery('#streams_container').css('background-color', 'yellow');
+                        jQuery('.emotionFace').css('background-image', 'url("../res/super.png")');
+                        break;
+                    case 'sad':
+                        jQuery('#streams_container').css('background-color', 'blue');
+                        jQuery('.emotionFace').css('background-image', 'url("../res/sad.png")');
+                        break;
+                    case 'high':
+                        jQuery('#streams_container').css('background-color', 'green');
+                        jQuery('.emotionFace').css('background-image', 'url("../res/high.png")');
+                        break;
+                    default:
+                        jQuery('#streams_container').css('background-color', 'black');
+                        jQuery('.emotionFace').css('background-image', '');
+                        break;
+                }
             }
-        }
-        // my emotion
-        else if (_this.session.connection.connectionId === signalData.from) {
+            // my emotion
+            else if (_this.session.connection.connectionId === signalData.from) {
 
+            }
         }
     }
 }
