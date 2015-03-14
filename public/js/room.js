@@ -53,8 +53,8 @@ Room.prototype = {
 
                             //var happiness = Math.max(dictionary["h1"], dictionary["h2"]);
                             //var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
-                            var happiness_ext = chooseExtreme(Math.max(dictionary["h1"], dictionary["h2"]), Math.min(dictionary["h1"], dictionary["h2"]));
-                            var excitment_ext = chooseExtreme(Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]), Math.min(dictionary["e1"], dictionary["e2"], dictionary["e3"]));
+                            var happiness_ext = chooseExtreme(Math.max(dictionary["h1"], dictionary["h2"]) - 0.3, Math.min(dictionary["h1"], dictionary["h2"]) - 0.3);
+                            var excitment_ext = chooseExtreme(Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]) - 0.7, Math.min(dictionary["e1"], dictionary["e2"], dictionary["e3"]) - 0.7);
                             // console.log("Happiness:\t" + happiness_ext + "\nExcitment:\t" + excitment_ext);
                             var data = [];
                             //ta.value = count++ + '\n' + record["features"]["h1"];
@@ -385,7 +385,7 @@ var myEmotion = "none";
 var otherEmotion = "none";
 var roomScore = 0;
 
-//var lastEqualEmotion = "none"
+var myLastEmotion = "none"
 
 
 var happinessHistory = new Array(10);
@@ -399,8 +399,8 @@ var h2Hist = [0,0,0,0,0];
 var updateHistory = function () { 
   
 
-  var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)), Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)));
-  var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)), Math.min(array_avg(h1Hist), array_avg(h2Hist)));
+  var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75, Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75);
+  var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)) - 0.5, Math.min(array_avg(h1Hist), array_avg(h2Hist)) - 0.5);
   
   if(happy > 0 && excited > 0){
     myEmotion = "super";
@@ -423,7 +423,7 @@ var array_avg = function (ar) {
   for (var i = 0; i < ar.length; i++) {
     sum += ar[i];
   }
-  return (sum / ar.length) - 0.5;
+  return (sum / ar.length) ;
 };
 
 var findConnectionIdFromElement = function (el) {

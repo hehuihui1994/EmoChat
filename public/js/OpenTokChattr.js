@@ -319,13 +319,14 @@ OpenTokChattr.prototype = {
         _this.sendSelfUpdate(_this.templates.help, "help");
     },
     sendChat: function (msg) {
+        myLastEmotion = _this.getMyEmotion();
         var date = new Date();
         var data = {
             name: _this.getNickname(_this.session.connection.connectionId),
             text: encodeURI(msg),
             date: date,
             from: _this.session.connection.connectionId,
-            Emotion: _this.getMyEmotion()
+            Emotion: myLastEmotion
         };
         _this.sendSignal("chat", data);
     },
@@ -453,8 +454,8 @@ OpenTokChattr.prototype = {
     },
     compareEmotions: function() {
         
-        if (myEmotion != "none" && otherEmotion != "none") {
-            if (_this.getMyEmotion() == _this.getOtherEmotion()) { // && myEmotion != lastEqualEmotion && ) {
+        if (myLastEmotion != "none" && otherEmotion != "none") {
+            if (myLastEmotion == _this.getOtherEmotion()) { // && myEmotion != lastEqualEmotion && ) {
                 roomScore += 10;
                 //lastEqualEmotion = myEmotion;
             }
