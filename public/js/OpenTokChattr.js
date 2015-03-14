@@ -68,7 +68,7 @@ OpenTokChattr.prototype = {
                 switch (signal.type) {
                     case "signal:chat":
                         _this.changeBackgroundColor(signalData);
-                        _this.updateRoomScore(signalData.LastRoomScore);
+                        _this.compareEmotions();
                         _this.messages.push({"type": "chat", data: signalData});
                         _this.printMessage({"type": "chat", data: signalData});
 
@@ -320,15 +320,13 @@ OpenTokChattr.prototype = {
     },
     sendChat: function (msg) {
         myLastEmotion = _this.getMyEmotion();
-        _this.compareEmotions();
         var date = new Date();
         var data = {
             name: _this.getNickname(_this.session.connection.connectionId),
             text: encodeURI(msg),
             date: date,
             from: _this.session.connection.connectionId,
-            Emotion: myLastEmotion,
-            LastRoomScore: roomScore
+            Emotion: myLastEmotion
         };
         _this.sendSignal("chat", data);
     },
@@ -465,14 +463,8 @@ OpenTokChattr.prototype = {
                 roomScore -= 5;
             };
         }
-        
+        _this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
         console.log("Score:" + roomScore + "\tmyEmotion:" + _this.getMyEmotion() + "\totherEmotion:" + _this.getOtherEmotion())
 
-    },
-    updateRoomScore: function(newScore){
-      if(newScore != null)
-        roomScore = newScore;
-        _this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
-      }
     }
 }
