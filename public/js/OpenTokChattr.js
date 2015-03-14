@@ -222,8 +222,12 @@ OpenTokChattr.prototype = {
                 tmplData.time = this._timeDifference(new Date(data.date), new Date());
                 tmplData.nickname = data.name + ": ";
                 tmplData.message = decodeURI(data.text).replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                tmplData.emotion = data.Emotion;
-                tmplData.emotionImg = _this.getEmotionImg(data.Emotion);
+                if (_this.isEmo) {
+                    tmplData.emotion = data.Emotion;
+                    tmplData.emotionImg = _this.getEmotionImg(data.Emotion);
+                } else {
+                    tmplData.emotionImg = '../res/empty.png'
+                }
                 tmplData.cls = _this.isMe(data.from) ? "from-me" : "from-others";
                 _this.appendToMessages('chat', tmplData);
                 break;
