@@ -16,6 +16,7 @@ function Room(roomId, session, token, chattr) {
 }
 Room.prototype = {
     constructor: Room,
+
     getEmotions: function () {
         var socket;
         if ( !window.WebSocket ) {
@@ -25,7 +26,9 @@ Room.prototype = {
             var reconnectInterval = 1000 * 60;
             var connect = function () {
                 var count = 0;
-                socket = new WebSocket( "ws://54.175.79.56:8080/v1/features/0006664e5401/pull" );
+                var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
+                //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull"
+                socket = new WebSocket( socketPath );
                 socket.onmessage = function ( event ) {
                     if (event.data) {
                         record = eval( "(" + event.data + ")" ); // convert to JSON
@@ -127,10 +130,11 @@ Room.prototype = {
         jQuery('#chatButton')[0].click();
         jQuery('.chatEnabled').css('width', '50%');
         this.getEmotions();
-    },
+    },    
     initOT: function () {
         var _this = this;
         var session = this.session;
+        //_this.loadUserId();
         session.connect(this.token, function (error) {
             _this.publisher = OT.initPublisher("<%= apiKey %>", "myPublisher", {width: "100%", height: "100%"});
             _this.publisher.on('streamDestroyed', function () {
@@ -375,7 +379,6 @@ Room.prototype = {
         this.applyFocus();
         this.layout();
     }
-
 };
 
 var myEmotion = "none";
@@ -414,7 +417,7 @@ var array_avg = function (ar) {
     sum += ar[i];
   }
   return sum / ar.length;
-}
+};
 
 var findConnectionIdFromElement = function (el) {
     var className;
@@ -426,7 +429,20 @@ var findConnectionIdFromElement = function (el) {
     }
     return undefined;
 };
+var loadUserId = function() {          
+          var uid = localStorage.getItem('emotiChatUserId');
 
+            if(uid == null){                
+              var uid = '046289';
+              console.log('user id not found, setting user id to:', uid);
+            }
+            else {                
+              console.log('user id' + uid);
+            }
+
+            return uid;
+
+      } ;
 var chooseExtreme = function(a, b) {
     if (Math.abs(a) > Math.abs(b)) {
         return a;

@@ -284,6 +284,8 @@ OpenTokChattr.prototype = {
             case "/unfocus":
                 _this.sendUnfocusSignal();
                 break;
+            case "/setId":
+                _this.setEmotiChatUserId(parts[1]);
             default:
                 _this.sendChat(text);
         }
@@ -352,6 +354,11 @@ OpenTokChattr.prototype = {
         if (_this.initialized && room.initialized) {
             _this.sendSignal("unfocus");
         }
+    },
+    setEmotiChatUserId: function(newId){
+      localStorage.setItem("emotiChatUserId", newId);
+      var uid = localStorage.getItem('emotiChatUserId');
+      console.log('emoti user id is now:' + uid);
     },
     getNickname: function (connectionId) {
         return _this.users[connectionId] || _this._defaultNickname(connectionId);
