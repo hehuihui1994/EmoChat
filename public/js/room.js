@@ -382,7 +382,12 @@ Room.prototype = {
 };
 
 var myEmotion = "none";
-var otherEmotion = "none";  
+var otherEmotion = "none";
+var roomScore = 0;
+
+//var lastEqualEmotion = "none"
+
+
 var happinessHistory = new Array(10);
 var excitementHistory = new Array(10);
 var e1Hist = [0,0,0,0,0];
@@ -453,4 +458,3 @@ var chooseExtreme = function(a, b) {
         return b;
     }
 };
-
