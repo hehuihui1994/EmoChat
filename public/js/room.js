@@ -382,11 +382,11 @@ var myEmotion = "none";
 var otherEmotion = "none";  
 var happinessHistory = new Array(10);
 var excitementHistory = new Array(10);
-var e1Hist = [0,0,0,0,0,0,0,0,0,0];
-var e2Hist = [0,0,0,0,0,0,0,0,0,0];
-var e3Hist = [0,0,0,0,0,0,0,0,0,0];
-var h1Hist = [0,0,0,0,0,0,0,0,0,0];
-var h2Hist = [0,0,0,0,0,0,0,0,0,0];
+var e1Hist = [0,0,0,0,0];
+var e2Hist = [0,0,0,0,0];
+var e3Hist = [0,0,0,0,0];
+var h1Hist = [0,0,0,0,0];
+var h2Hist = [0,0,0,0,0];
 
 var updateHistory = function () { 
   
