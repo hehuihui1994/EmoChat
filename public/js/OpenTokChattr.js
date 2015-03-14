@@ -219,7 +219,7 @@ OpenTokChattr.prototype = {
             case "status":
                 tmplData.oldName = data.oldName;
                 tmplData.newName = data.newName;
-                _this.appendToMessages('status', tmplData);
+                // _this.appendToMessages('status', tmplData);
                 break;
             case "newUser":
                 if (!_this.isMe(data.from) || !data) {
