@@ -210,7 +210,6 @@ OpenTokChattr.prototype = {
                 tmplData.message = decodeURI(data.text).replace(/</g, '&lt;').replace(/>/g, '&gt;');
                 tmplData.emotion = data.Emotion;
                 tmplData.emotionImg = _this.getEmotionImg(data.Emotion);
-                tmplData.message += "  " + decodeURI(data.Emotion).replace(/</g, '&lt;').replace(/>/g, '&gt;'); // TODO: remove
                 tmplData.cls = _this.isMe(data.from) ? "from-me" : "from-others";
                 _this.appendToMessages('chat', tmplData);
                 break;
@@ -419,7 +418,7 @@ OpenTokChattr.prototype = {
                 pos = 1;
             }
             $($('.streamContainer')[pos]).css('-webkit-box-shadow', '0 0 30px ' + _this.getEmotionColor(signalData.Emotion));
-            jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');
+            //jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');
         }
     }
 }
