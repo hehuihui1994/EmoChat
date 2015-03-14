@@ -112,8 +112,9 @@ OpenTokChattr.prototype = {
             }
         });
         jQuery( "body" ).keydown(function(event) {
-            console.log( "Handler for .keypress() called." );
             var mockData = {};
+            //mockData.from = _this.session.connection.connectionId;
+            mockData.from = "notMe"; // this change the other person's emotion
             switch ( event.which ) {
                 case 49:
                     event.preventDefault();
@@ -180,6 +181,24 @@ OpenTokChattr.prototype = {
             _this.printMessage(_this.messages[i]);
         }
     },
+    getEmotionImg: function (emotion) {
+        switch (emotion) {
+            case 'angry':
+                return '../res/angry.png';
+                break;
+            case 'super':
+                return '../res/super.png';
+                break;
+            case 'high':
+                return '../res/high.png';
+                break;
+            case 'sad':
+                return '../res/sad.png';
+                break;
+            default:
+                return '../res/super.png';
+        }
+    },
     printMessage: function (msg) {
         var data = msg.data;
         var html = "";
@@ -189,7 +208,9 @@ OpenTokChattr.prototype = {
                 tmplData.time = this._timeDifference(new Date(data.date), new Date());
                 tmplData.nickname = data.name + ": ";
                 tmplData.message = decodeURI(data.text).replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                tmplData.message += "  " + decodeURI(data.Emotion).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                tmplData.emotion = data.Emotion;
+                tmplData.emotionImg = _this.getEmotionImg(data.Emotion);
+                tmplData.message += "  " + decodeURI(data.Emotion).replace(/</g, '&lt;').replace(/>/g, '&gt;'); // TODO: remove
                 tmplData.cls = _this.isMe(data.from) ? "from-me" : "from-others";
                 _this.appendToMessages('chat', tmplData);
                 break;
@@ -278,7 +299,7 @@ OpenTokChattr.prototype = {
             text: encodeURI(msg),
             date: date,
             from: _this.session.connection.connectionId,
-            Emotion: _this.getEmotion()
+            Emotion: _this.getMyEmotion()
         };
         _this.sendSignal("chat", data);
     },
@@ -359,41 +380,39 @@ OpenTokChattr.prototype = {
     _defaultNickname: function (connectionId) {
         return "Guest-" + connectionId.substring(connectionId.length - 8, connectionId.length)
     },
-    getEmotion: function () {
+    getMyEmotion: function () {
         // Getting emotion from Aharon and setting in the outgoing message
         return myEmotion;
     },
+    getEmotionColor: function (emotion) {
+        switch (emotion) {
+            case 'angry':
+                return 'red';
+                break;
+            case 'super':
+                return 'pink';
+                break;
+            case 'high':
+                return 'green';
+                break;
+            case 'sad':
+                return 'blue';
+                break;
+            default:
+                return '';
+        }
+    },
     changeBackgroundColor: function (signalData) {
         if (signalData && signalData.Emotion) {
-            // other person emotion
-            if (_this.session.connection.connectionId !== signalData.from) {
-                switch (signalData.Emotion) {
-                    case 'angry':
-                        jQuery('#streams_container').css('background-color', 'red');
-                        jQuery('.emotionFace').css('background-image', 'url("../res/angry.png")');
-                        break;
-                    case 'super':
-                        jQuery('#streams_container').css('background-color', 'yellow');
-                        jQuery('.emotionFace').css('background-image', 'url("../res/super.png")');
-                        break;
-                    case 'sad':
-                        jQuery('#streams_container').css('background-color', 'blue');
-                        jQuery('.emotionFace').css('background-image', 'url("../res/sad.png")');
-                        break;
-                    case 'high':
-                        jQuery('#streams_container').css('background-color', 'green');
-                        jQuery('.emotionFace').css('background-image', 'url("../res/high.png")');
-                        break;
-                    default:
-                        jQuery('#streams_container').css('background-color', 'black');
-                        jQuery('.emotionFace').css('background-image', '');
-                        break;
-                }
+            var pos; // the array position of the video container
+            if (_this.isMe(signalData.from)) {
+                pos = 0;
             }
-            // my emotion
-            else if (_this.session.connection.connectionId === signalData.from) {
-
+            else {
+                pos = 1;
             }
+            $($('.streamContainer')[pos]).css('-webkit-box-shadow', '0 0 30px ' + _this.getEmotionColor(signalData.Emotion));
+            jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');
         }
     }
 }

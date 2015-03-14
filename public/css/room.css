@@ -340,9 +340,6 @@ body #streams_container {
     text-align: center;
     box-sizing: border-box;
     width: 100%;
-    transition: background 4s linear;
-    -webkit-transition: background 4s linear;
-    -moz-transition: background 4s linear;
 }
 
 body #streams_container .streamContainer {
@@ -358,6 +355,12 @@ body #streams_container .emotionFace {
     -moz-transition: opacity 2s ease-in-out;
     -o-transition: opacity 2s ease-in-out;
     transition: opacity 2s ease-in-out;
+}
+
+body .streamContainer {
+    transition: -webkit-box-shadow 2s linear;
+    -webkit-transition: -webkit-box-shadow 2s linear;
+    -moz-transition: -webkit-box-shadow 2s linear;
 }
 
 body #streams_container .streamContainer .OT_video-container {

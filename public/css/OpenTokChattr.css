@@ -172,6 +172,19 @@ ol, ul {
   color: white;
   font-weight: 100;
 }
+#chattr .inner-chat ul#messages li img{
+    border-radius: 8px;
+    padding: 8px 15px;
+    max-width: 80%;
+    position: relative;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 30px;
+    color: white;
+    font-weight: 100;
+    width: 20px;
+}
 #chattr .inner-chat ul#messages li.from-me p{
   background-color: #4f97af;
   float: right;
