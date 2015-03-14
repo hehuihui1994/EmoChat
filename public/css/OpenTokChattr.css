@@ -185,12 +185,12 @@ ol, ul {
     font-weight: 100;
     width: 20px;
 }
-.chat .from-me img {
-    float: right;
-}
 #chattr .inner-chat ul#messages li.from-me p{
   background-color: #4f97af;
   float: right;
+}
+#chattr .inner-chat ul#messages li.from-me img {
+    float: right;
 }
 #chattr .inner-chat ul#messages li.from-others p{
   background-color: #555;
