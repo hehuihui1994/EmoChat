@@ -55,7 +55,7 @@ Room.prototype = {
                             //var excitment = Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]);
                             var happiness_ext = chooseExtreme(Math.max(dictionary["h1"], dictionary["h2"]), Math.min(dictionary["h1"], dictionary["h2"]));
                             var excitment_ext = chooseExtreme(Math.max(dictionary["e1"], dictionary["e2"], dictionary["e3"]), Math.min(dictionary["e1"], dictionary["e2"], dictionary["e3"]));
-                            console.log("Happiness:\t" + happiness_ext + "\nExcitment:\t" + excitment_ext);
+                            // console.log("Happiness:\t" + happiness_ext + "\nExcitment:\t" + excitment_ext);
                             var data = [];
                             //ta.value = count++ + '\n' + record["features"]["h1"];
                             for(var key in dictionary) {
@@ -396,7 +396,7 @@ var updateHistory = function () {
 
   var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)), Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)));
   var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)), Math.min(array_avg(h1Hist), array_avg(h2Hist)));
-
+  
   if(happy > 0 && excited > 0){
     myEmotion = "super";
   }
@@ -409,6 +409,8 @@ var updateHistory = function () {
   if(happy > 0 && excited < 0){
     myEmotion = "high";
   }
+
+  console.log("Emotion: " + myEmotion + "\tExcitment: " + excited + "\tHappiness: " + happy);
 }
 
 var array_avg = function (ar) {
@@ -416,7 +418,7 @@ var array_avg = function (ar) {
   for (var i = 0; i < ar.length; i++) {
     sum += ar[i];
   }
-  return sum / ar.length;
+  return (sum / ar.length) - 0.5;
 };
 
 var findConnectionIdFromElement = function (el) {

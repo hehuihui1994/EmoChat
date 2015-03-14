@@ -77,6 +77,9 @@ OpenTokChattr.prototype = {
                             _this.initialized = true;
                         }
                         break;
+                    case "signal:emotionOnly":
+                        _this.messages.push({"type": "emotionOnly", data: signalData});
+                        break;
                     case "signal:focus":
                         _this.printMessage({
                             type: "focus",
