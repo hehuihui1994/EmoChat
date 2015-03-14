@@ -11,7 +11,7 @@ function OpenTokChattr(targetElem, roomId, session, options) {
     this.templates = {};
     this.initChattrTemplates();
     this.targetElem.append(Handlebars.compile(this.templates.base));
-    this.targetElem.find("#chattr #roomId").html(this.roomId);
+    this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
     $("#chatInput").keyup(_this.checkKeyPress);
     $('#emoToggle').click(_this.emoToggle);
     this.uiActions();
@@ -61,8 +61,10 @@ OpenTokChattr.prototype = {
                 switch (signal.type) {
                     case "signal:chat":
                         _this.changeBackgroundColor(signalData);
+                        _this.compareEmotions();
                         _this.messages.push({"type": "chat", data: signalData});
                         _this.printMessage({"type": "chat", data: signalData});
+
                     case "signal:name":
                         var oldName = _this.getNickname(signalData.from);
                         var nameData = {"oldName": oldName, "newName": signalData.newName};
@@ -228,7 +230,7 @@ OpenTokChattr.prototype = {
             case "status":
                 tmplData.oldName = data.oldName;
                 tmplData.newName = data.newName;
-                _this.appendToMessages('status', tmplData);
+                // _this.appendToMessages('status', tmplData);
                 break;
             case "newUser":
                 if (!_this.isMe(data.from) || !data) {
@@ -402,6 +404,10 @@ OpenTokChattr.prototype = {
         // Getting emotion from Aharon and setting in the outgoing message
         return myEmotion;
     },
+    getOtherEmotion: function () {
+        // Getting emotion from Aharon and setting in the outgoing message
+        return otherEmotion;
+    },
     getEmotionColor: function (emotion) {
         switch (emotion) {
             case 'angry':
@@ -428,9 +434,25 @@ OpenTokChattr.prototype = {
             }
             else {
                 pos = 1;
+                otherEmotion = signalData.Emotion;
             }
             $($('.streamContainer')[pos]).css('-webkit-box-shadow', '0 0 30px ' + _this.getEmotionColor(signalData.Emotion));
-            //jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');
+            //jQuery('.emotionFace').css('background-image', 'url("' + _this.getEmotionImg(signalData.Emotion) + '")');)
         }
+    },
+    compareEmotions: function() {
+        
+        if (myEmotion != "none" && otherEmotion != "none") {
+            if (_this.getMyEmotion() == _this.getOtherEmotion()) { // && myEmotion != lastEqualEmotion && ) {
+                roomScore += 10;
+                //lastEqualEmotion = myEmotion;
+            }
+            else  {
+                roomScore -= 5;
+            };
+        }
+        _this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
+        console.log("Score:" + roomScore + "\tmyEmotion:" + _this.getMyEmotion() + "\totherEmotion:" + _this.getOtherEmotion())
+
     }
 }
