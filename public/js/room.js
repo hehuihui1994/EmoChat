@@ -26,7 +26,7 @@ Room.prototype = {
             var reconnectInterval = 1000 * 60;
             var connect = function () {
                 var count = 0;
-                var socketPath = "ws://54.175.79.56:8080/v1/features/0006664e" + loadUserId() + "/pull"; 
+                var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
                 //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull"
                 socket = new WebSocket( socketPath );
                 socket.onmessage = function ( event ) {
@@ -379,7 +379,6 @@ Room.prototype = {
         this.applyFocus();
         this.layout();
     }
-
 };
 
 var myEmotion = "none";
@@ -434,7 +433,7 @@ var loadUserId = function() {
           var uid = localStorage.getItem('emotiChatUserId');
 
             if(uid == null){                
-              var uid = '6289';
+              var uid = '046289';
               console.log('user id not found, setting user id to:', uid);
             }
             else {                
