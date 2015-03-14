@@ -13,6 +13,7 @@ function OpenTokChattr(targetElem, roomId, session, options) {
     this.targetElem.append(Handlebars.compile(this.templates.base));
     this.targetElem.find("#chattr #roomId").html(this.roomId);
     $("#chatInput").keyup(_this.checkKeyPress);
+    $('#emoToggle').click(_this.emoToggle);
     this.uiActions();
     // Every 10 seconds update the times for everyone
     setInterval(function () {
@@ -38,6 +39,14 @@ OpenTokChattr.prototype = {
         _this.templates.nameExists = $('#chattrNameExistsTpl').html();
         _this.templates.focus = $('#chattrFocusTpl').html();
         _this.templates.unfocus = $('#chattrUnfocusTpl').html();
+    },
+    emoToggle: function () {
+        _this.isEmo = _this.isEmo ? false : true;
+        if (_this.isEmo) {
+            $('#emoToggle').css('background-image', 'url("../res/superB.png")');
+        } else {
+            $('#emoToggle').css('background-image', 'url("../res/super.png")');
+        }
     },
     initOpenTok: function () {
         _this.session.on({
@@ -114,11 +123,11 @@ OpenTokChattr.prototype = {
                 delete _this.users[event.connection.connectionId];
             }
         });
-        jQuery( "body" ).keydown(function(event) {
+        jQuery("body").keydown(function (event) {
             var mockData = {};
             //mockData.from = _this.session.connection.connectionId;
             mockData.from = "notMe"; // this change the other person's emotion
-            switch ( event.which ) {
+            switch (event.which) {
                 case 49:
                     event.preventDefault();
                     mockData.Emotion = 'high';
@@ -138,7 +147,7 @@ OpenTokChattr.prototype = {
                 default :
                     break;
             }
-            _this.changeBackgroundColor(mockData)
+            _this.changeBackgroundColor(mockData);
         });
     },
     close: function () {
@@ -357,10 +366,10 @@ OpenTokChattr.prototype = {
             _this.sendSignal("unfocus");
         }
     },
-    setEmotiChatUserId: function(newId){
-      localStorage.setItem("emotiChatUserId", newId);
-      var uid = localStorage.getItem('emotiChatUserId');
-      console.log('emoti user id is now:' + uid);
+    setEmotiChatUserId: function (newId) {
+        localStorage.setItem("emotiChatUserId", newId);
+        var uid = localStorage.getItem('emotiChatUserId');
+        console.log('emoti user id is now:' + uid);
     },
     getNickname: function (connectionId) {
         return _this.users[connectionId] || _this._defaultNickname(connectionId);
@@ -412,7 +421,7 @@ OpenTokChattr.prototype = {
         }
     },
     changeBackgroundColor: function (signalData) {
-        if (signalData && signalData.Emotion) {
+        if (signalData && signalData.Emotion && _this.isEmo) {
             var pos; // the array position of the video container
             if (_this.isMe(signalData.from)) {
                 pos = 0;
