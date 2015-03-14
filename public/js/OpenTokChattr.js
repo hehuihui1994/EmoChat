@@ -11,7 +11,7 @@ function OpenTokChattr(targetElem, roomId, session, options) {
     this.templates = {};
     this.initChattrTemplates();
     this.targetElem.append(Handlebars.compile(this.templates.base));
-    this.targetElem.find("#chattr #roomId").html(this.roomId);
+    this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
     $("#chatInput").keyup(_this.checkKeyPress);
     this.uiActions();
     // Every 10 seconds update the times for everyone
@@ -442,6 +442,7 @@ OpenTokChattr.prototype = {
                 roomScore -= 5;
             };
         }
+        _this.targetElem.find("#chattr #roomId").html('Room emotional score: ' + roomScore);
         console.log("Score:" + roomScore + "\tmyEmotion:" + _this.getMyEmotion() + "\totherEmotion:" + _this.getOtherEmotion())
 
     }
