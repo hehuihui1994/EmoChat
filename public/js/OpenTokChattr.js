@@ -187,19 +187,19 @@ OpenTokChattr.prototype = {
     getEmotionImg: function (emotion) {
         switch (emotion) {
             case 'angry':
-                return '../res/angry.png';
+                return '../res/angry1.png';
                 break;
             case 'super':
-                return '../res/super.png';
+                return '../res/super1.png';
                 break;
             case 'high':
-                return '../res/high.png';
+                return '../res/high1.png';
                 break;
             case 'sad':
-                return '../res/sad.png';
+                return '../res/sad1.png';
                 break;
             default:
-                return '../res/super.png';
+                return '../res/super1.png';
         }
     },
     printMessage: function (msg) {

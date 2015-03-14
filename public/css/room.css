@@ -340,6 +340,7 @@ body #streams_container {
     text-align: center;
     box-sizing: border-box;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 body #streams_container .streamContainer {
@@ -347,6 +348,7 @@ body #streams_container .streamContainer {
     position: relative;
     text-align: center;
     box-sizing: border-box;
+    margin: 10px;
 }
 
 body #streams_container .emotionFace {
