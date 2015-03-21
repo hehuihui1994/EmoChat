@@ -1,6 +1,11 @@
-# WebRTC Demo
+# Emotion Enhanced Chat
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/opentok/OpenTokRTC)
+EmoChat is the 1st place winner of a 2-days hackthon named [Brainihack](http://brainihack.org/).
+This project is based on [OpenTokRTC](https://github.com/opentok/OpenTokRTC) and enhances with **emotion detection
+capabilities** using **NeuroSteer** EEG headset.
+
+The idea is to detect the user emotion using live EEG feed and enable emotion sharing over the chat room by
+gestures like emojis next to chat line and color changes according to peer's mode.
 
 ## File Overview
 * `Procfile` is required to run the nodejs app on Heroku
@@ -16,14 +21,17 @@
 ## How to run the app:
 1. Clone [this repo]( https://github.com/opentok/OpenTokRTC )  
 2. Get my API Key and Secret from [TokBox]( http://TokBox.com )  
-3. Replace `OTKEY` and `OTSECRET` with your corresponding API Key and Secret in `app.js`  
+3. Replace `OTKEY` and `OTSECRET` with your corresponding API Key and Secret in `config.js` or by setting your env variables
 4. Run `npm install` to install the necessary packages  
 5. Start the server with `node app.js`  
 
-## Deploying this app to your own host (Heroku):
-1. Clone [this repo]( https://github.com/opentok/OpenTokRTC )  
-2. Go into the cloned repo: `cd OpenTokRTC`  
-1. Create a heroku app: `heroku create appName`  
-2. Add your TokBox apiKey and secret credentials in `config.js` or set [Heroku's environment variables](https://devcenter.heroku.com/articles/config-vars)   
-2. Push to remote heroku repository: `git push heroku master`  
-3. Visit your app  
+## How to use:
+
+1. In the chat main screen (usaly localhost:9393) enter a room name (anything would do)
+2. type in the chat /help to get a list of configurations available
+3. To link the NeuroSteer headset with the current chat user type `/user <last 6 digits of the headset serial #>`
+
+## Additional links:
+
+1. https://vimeo.com/122224388 - presentation at Brainihack final demo
+2. https://vimeo.com/122826001 - screen capture of a chat we did in Brainhack's final demo

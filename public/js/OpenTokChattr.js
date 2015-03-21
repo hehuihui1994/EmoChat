@@ -71,7 +71,7 @@ OpenTokChattr.prototype = {
                         _this.compareEmotions();
                         _this.messages.push({"type": "chat", data: signalData});
                         _this.printMessage({"type": "chat", data: signalData});
-
+                        break;
                     case "signal:name":
                         var oldName = _this.getNickname(signalData.from);
                         var nameData = {"oldName": oldName, "newName": signalData.newName};
@@ -308,7 +308,7 @@ OpenTokChattr.prototype = {
             case "/unfocus":
                 _this.sendUnfocusSignal();
                 break;
-            case "/setId":
+            case "/user":
                 _this.setEmotiChatUserId(parts[1]);
             default:
                 _this.sendChat(text);

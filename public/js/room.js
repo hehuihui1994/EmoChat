@@ -436,20 +436,20 @@ var findConnectionIdFromElement = function (el) {
     }
     return undefined;
 };
-var loadUserId = function() {          
-          var uid = localStorage.getItem('emotiChatUserId');
+var loadUserId = function () {
+    var uid = localStorage.getItem('emotiChatUserId');
 
-            if(uid == null){                
-              var uid = '046289';
-              console.log('user id not found, setting user id to:', uid);
-            }
-            else {                
-              console.log('user id' + uid);
-            }
+    if (uid == null) {
+        var uid = '046289';
+        console.log('user id not found, setting user id to:', uid);
+    }
+    else {
+        console.log('user id' + uid);
+    }
 
-            return uid;
+    return uid;
 
-      } ;
+};
 var chooseExtreme = function(a, b) {
     if (Math.abs(a) > Math.abs(b)) {
         return a;
