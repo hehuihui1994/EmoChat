@@ -23,7 +23,7 @@ Room.prototype = {
             window.WebSocket = window.MozWebSocket;
         }
         if ( window.WebSocket ) {
-            var reconnectInterval = 1000 * 60;
+            var reconnectInterval = 1000 * 5;
             var connect = function () {
                 var count = 0;
                 var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
