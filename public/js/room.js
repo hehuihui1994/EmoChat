@@ -27,7 +27,8 @@ Room.prototype = {
             var connect = function () {
                 var count = 0;
                 var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
-                //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull"
+                //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull"046289
+                //"ws://54.175.79.56:8080/v1/features/000666046289/pull"
                 socket = new WebSocket( socketPath );
                 socket.onmessage = function ( event ) {
                     if (event.data) {
