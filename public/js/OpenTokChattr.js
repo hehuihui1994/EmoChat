@@ -131,33 +131,7 @@ OpenTokChattr.prototype = {
                 _this.printMessage({"type": "userLeave", data: {"from": event.connection.connectionId}});
                 delete _this.users[event.connection.connectionId];
             }
-        });
-        jQuery("body").keydown(function (event) {
-            var mockData = {};
-            //mockData.from = _this.session.connection.connectionId;
-            mockData.from = "notMe"; // this change the other person's emotion
-            switch (event.which) {
-                case 49:
-                    event.preventDefault();
-                    mockData.Emotion = 'high';
-                    break;
-                case 50:
-                    event.preventDefault();
-                    mockData.Emotion = 'sad';
-                    break;
-                case 51:
-                    event.preventDefault();
-                    mockData.Emotion = 'super';
-                    break;
-                case 52:
-                    event.preventDefault();
-                    mockData.Emotion = 'angry';
-                    break;
-                default :
-                    break;
-            }
-            _this.changeBackgroundColor(mockData);
-        });
+        });        
     },
     close: function () {
         if (this.options.closeable)
