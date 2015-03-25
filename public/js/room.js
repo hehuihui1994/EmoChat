@@ -27,8 +27,8 @@ Room.prototype = {
             var connect = function () {
                 var count = 0;
                 var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
-                //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull"046289
-                //"ws://54.175.79.56:8080/v1/features/000666046289/pull"
+                //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull" 4e5401
+                //"ws://54.175.79.56:8080/v1/features/000666046289/pull" 046289
                 socket = new WebSocket( socketPath );
                 socket.onmessage = function ( event ) {
                     if (event.data) {
@@ -401,7 +401,7 @@ var updateHistory = function () {
   
 
   var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75, Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75);
-  var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)) - 0.5, Math.min(array_avg(h1Hist), array_avg(h2Hist)) - 0.5);
+  var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)) - 0.25, Math.min(array_avg(h1Hist), array_avg(h2Hist)) - 0.25);
   
   if(happy > 0 && excited > 0){
     myEmotion = "super";
