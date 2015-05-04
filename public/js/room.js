@@ -401,7 +401,7 @@ var h2Hist = [0,0];
 var updateHistory = function () { 
   
 
-  var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75, Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) - 0.75);
+  var excited = chooseExtreme(Math.max(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) + 0.25, Math.min(array_avg(e1Hist), array_avg(e2Hist), array_avg(e3Hist)) + 0.25);
   var happy = chooseExtreme(Math.max(array_avg(h1Hist), array_avg(h2Hist)) - 0.25, Math.min(array_avg(h1Hist), array_avg(h2Hist)) - 0.25);
   
   if(happy > 0 && excited > 0){
