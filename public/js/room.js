@@ -26,7 +26,8 @@ Room.prototype = {
             var reconnectInterval = 1000 * 5;
             var connect = function () {
                 var count = 0;
-                var socketPath = "ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
+                var socketPath = "ws://52.5.136.162:8080/v1/features/000666" + loadUserId() + "/pull"; 
+                //"ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
                 //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull" 4e5401
                 //"ws://54.175.79.56:8080/v1/features/000666046289/pull" 046289
                 socket = new WebSocket( socketPath );
