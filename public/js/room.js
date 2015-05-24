@@ -26,7 +26,7 @@ Room.prototype = {
             var reconnectInterval = 1000 * 5;
             var connect = function () {
                 var count = 0;
-                var socketPath = "ws://cloud.neurosteer.com/v1/features/000666" + loadUserId() + "/pull"; 
+                var socketPath = "ws://cloud.neurosteer.com:8080/v1/features/000666" + loadUserId() + "/pull"; 
                 //"ws://52.5.136.162:8080/v1/features/000666" + loadUserId() + "/pull"; 
                 //"ws://54.175.79.56:8080/v1/features/000666" + loadUserId() + "/pull"; 
                 //"ws://54.175.79.56:8080/v1/features/0006664e5401/pull" 4e5401
